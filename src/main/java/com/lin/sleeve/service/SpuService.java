@@ -19,6 +19,10 @@ public class SpuService {
     @Autowired
     private SpuRepository spuRepository;
 
+    public Spu getSpu(Long id) {
+        return spuRepository.findOneById(id);
+    }
+
     /**
      * 分页查询Spu详情
      * @param pageNum 第几页（从0开始 -> 第1页）
