@@ -1,7 +1,9 @@
 package com.lin.sleeve.service;
 
+import com.lin.sleeve.constant.Constants;
 import com.lin.sleeve.dao.SpuRepository;
 import com.lin.sleeve.entity.Spu;
+import com.lin.sleeve.exception.http.NotFoundException;
 import com.lin.sleeve.vo.Paging;
 import com.lin.sleeve.vo.SpuVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,11 @@ public class SpuService {
     private SpuRepository spuRepository;
 
     public Spu getSpu(Long id) {
-        return spuRepository.findOneById(id);
+        Spu spu = spuRepository.findOneById(id);
+        if (spu == null) {
+            throw new NotFoundException(Constants.ErrorMsg.SPU_NOT_EXIST);
+        }
+        return spu;
     }
 
     /**
